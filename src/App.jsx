@@ -1,22 +1,15 @@
 import { useState } from "react";
 import "./App.css";
+import SignUpForm from "./components/SignUpForm.jsx";
+import Authenticate from "./components/Authenticate.jsx";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() {
+  const [token, setToken] = useState(null);
   return (
     <>
-      <div></div>
-      <h1></h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p> </p>
-      </div>
-      <p></p>
+      <SignUpForm token={token} setToken={setToken} />
+      <Authenticate token={token} setToken={setToken} />
     </>
   );
 }
-
-export default App;
+// App();
