@@ -1,8 +1,12 @@
 import { useState } from "react";
-export default function Authenticate({ token, setToken }) {
-  const [successMessage, setSuccessMessage] = useState(null);
+
+export default function Authenticate({ token }) {
+  const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
+  const [username, setUsername] = useState(null);
+
   async function handleClick() {
+    // setSuccessMessage(null);
     try {
       const response = await fetch(
         "https://fsa-jwt-practice.herokuapp.com/authenticate",
@@ -15,17 +19,30 @@ export default function Authenticate({ token, setToken }) {
         }
       );
       const result = await response.json();
-      setSuccessMessage(result.message);
+      setMessage(result.message);
+      setUsername(result.data.username.username);
+      console.log(result.data);
     } catch (error) {
       setError(error.message);
     }
   }
   return (
-    <div>
-      <h2>Authenticate!</h2>
-      {successMessage && <p>{successMessage}</p>}
-      {error && <p>{error}</p>}
-      <button onClick={handleClick}>Authenticate Token!🧐</button>
+    <div className="form">
+      <h3>Next, Click Authenticate Token!</h3>
+
+      {message && message == "Correctly Authenticated!" ? (
+        <p className="yea">{`${username}, you have been ${message}`}</p>
+      ) : (
+        <div></div>
+      )}
+
+      {message && message !== "Correctly Authenticated!" ? (
+        <p className="nay">Failed Authentication-- {message}!</p>
+      ) : (
+        <div></div>
+      )}
+
+      <button onClick={handleClick}>Authenticate Token </button>
     </div>
   );
 }
