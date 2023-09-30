@@ -4,6 +4,7 @@ export default function Authenticate({ token }) {
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
   const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState("");
 
   async function handleClick() {
     // setSuccessMessage(null);

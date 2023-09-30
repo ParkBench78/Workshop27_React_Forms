@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 export default function SignUpForm({ token, setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -30,6 +31,9 @@ export default function SignUpForm({ token, setToken }) {
       const result = await response.json();
       setToken(result.token);
       console.log(`Success - Token Returned:${result.token}`);
+      alert(
+        "Login credentials accepted. Next, proceed with Token Authentication"
+      );
     } catch (error) {
       setError(error.message);
     }
